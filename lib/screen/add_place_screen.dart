@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:note_the_place/widgets/image_input.dart';
+import 'package:note_the_place/providers/note_places.dart';
+import 'dart:io';
+import 'package:provider/provider.dart';
+
+import '../widgets/image_input.dart';
 
 class AddPlaceScree extends StatefulWidget {
   const AddPlaceScree({Key? key}) : super(key: key);
@@ -10,6 +14,22 @@ class AddPlaceScree extends StatefulWidget {
 
 class _AddPlaceScreeState extends State<AddPlaceScree> {
   final _titleController = TextEditingController();
+
+  File? _imagePicked;
+
+  void _selectImage(File imagePicker) {
+    _imagePicked = imagePicker;
+  }
+
+  void _savePlace() {
+    if (_titleController.text.isEmpty || _imagePicked == null) {
+      return;
+    }
+    Provider.of<NotePlaces>(context, listen: false)
+        .addPlace(_titleController.text, _imagePicked!);
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +54,7 @@ class _AddPlaceScreeState extends State<AddPlaceScree> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const ImageInput(),
+                    ImageInput(_selectImage),
 
                     // TextField(),
                     // TextField(),
@@ -44,7 +64,7 @@ class _AddPlaceScreeState extends State<AddPlaceScree> {
               ),
             )),
             ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: _savePlace,
                 icon: const Icon(
                   Icons.add,
                   color: Colors.black,

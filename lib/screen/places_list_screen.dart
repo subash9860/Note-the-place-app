@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:note_the_place/providers/note_places.dart';
+import 'package:provider/provider.dart';
+
 import '../screen/add_place_screen.dart';
 
 class PlaceListScreen extends StatelessWidget {
@@ -18,8 +21,28 @@ class PlaceListScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: const Center(
-        child: CircularProgressIndicator(color: Colors.amber,),
+      body: Consumer<NotePlaces>(
+        child:const Center(
+          child:  Text('Got no places yet, start adding some!'),
+        ),
+        builder: (ctx, greatPlaces, ch) => greatPlaces.items.length <= 0
+            ? ch!
+            : ListView.builder(
+                itemCount: greatPlaces.items.length,
+                itemBuilder: (ctx, i) => Card(
+                  child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: FileImage(
+                            greatPlaces.items[i].image,
+                          ),
+                        ),
+                        title: Text(greatPlaces.items[i].title),
+                        onTap: () {
+                          // Go to detail page ...
+                        },
+                      ),
+                ),
+              ),
       ),
     );
   }
