@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:note_the_place/widgets/place_input.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/note_places.dart';
@@ -55,10 +56,8 @@ class _AddPlaceScreeState extends State<AddPlaceScree> {
                       height: 10,
                     ),
                     ImageInput(_selectImage),
-
-                    // TextField(),
-                    // TextField(),
-                    // TextField(),
+                    const SizedBox(height: 25),
+                    const PlaceInput(),
                   ],
                 ),
               ),
