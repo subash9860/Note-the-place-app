@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:note_the_place/screen/map_screen.dart';
 import '../widgets/map_current_loc.dart';
 
 class PlaceInput extends StatefulWidget {
@@ -59,7 +60,6 @@ class _PlaceInputState extends State<PlaceInput> {
                 setState(() {
                   _previewImageUrl = true;
                 });
-                // _getUserLocation;
               },
               icon: const Icon(Icons.location_on),
               label: const Text("Current loaction"),
@@ -68,8 +68,8 @@ class _PlaceInputState extends State<PlaceInput> {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (ctx) => CurrentLoc(lat!, lng!),
-                    // MapScreen(lat!, lng!),
+                    fullscreenDialog: true,
+                    builder: (ctx) => MapScreen(),
                   ),
                 );
               },

@@ -44,8 +44,6 @@ dev_dependencies:
   path: ^1.8.0
   sqflite: ^2.0.0+4
   location: ^4.2.0
-
-
   flutter_map: any
   latlong: ^0.6.1
   
